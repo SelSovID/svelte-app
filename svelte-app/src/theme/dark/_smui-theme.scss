@@ -6,8 +6,6 @@
 @use '@material/theme/index' as theme with (
   $primary: #154273,
   $secondary: color.scale(#676778, $whiteness: -10%),
-  $groen: color.scale(#00861d, $whiteness: -10%),
-  $rood: color.scale(#b60000, $whiteness: -10%),
   $surface: color.adjust(color-palette.$grey-900, $blue: +4),
   $background: #181818,
   $error: color-palette.$red-700

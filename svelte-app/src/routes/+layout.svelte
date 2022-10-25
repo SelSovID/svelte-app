@@ -45,7 +45,7 @@
 
     <Section align="end" toolbar>
       <IconButton on:click={() => (darkTheme = !darkTheme)} class="material-icons"> 
-        {#if darkTheme === undefined}nightlight{:else if darkTheme === true}nightlight{:else}sunny{/if} 
+        {#if darkTheme === undefined}nightlight{:else if darkTheme === true}sunny{:else}nightlight{/if} 
       </IconButton>
     </Section>
   </Row>

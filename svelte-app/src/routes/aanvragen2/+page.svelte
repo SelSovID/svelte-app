@@ -5,15 +5,15 @@
     let clicked = 0;
 
     let options = [
-        {name: 'Bruce Willis', aaa: undefined},
-        {name: 'Austin Powers',aaa: undefined},
-        {name: 'Thomas Edison', aaa: undefined},
-        {name: 'Stephen Hawking', aaa: undefined},
-        {name: 'Wouter de Boer', aaa: undefined},
-        {name: 'Hylbren Rijnders', aaa: undefined},
-        {name: 'Mees van Dijk', aaa: undefined},
-        {name: 'Daniel Hofman', aaa: undefined},
-        {name: 'Henk Tatje', aaa: undefined},
+        {name: 'Bruce Willis'},
+        {name: 'Austin Powers'},
+        {name: 'Thomas Edison'},
+        {name: 'Stephen Hawking'},
+        {name: 'Wouter de Boer'},
+        {name: 'Hylbren Rijnders'},
+        {name: 'Mees van Dijk'},
+        {name: 'Daniel Hofman'},
+        {name: 'Henk Tatje'},
     ];
     let selection = 'Stephen Hawking';
     // This value is updated when the component is initialized, based on the
@@ -21,8 +21,6 @@
     let selectionIndex: number | undefined = undefined;
 
     let selectionStatus: number | undefined = undefined;
-
-    let goedgekeurd: Array<string>;
 </script>
 
 <h1>Aanvragen</h1>
