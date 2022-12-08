@@ -1,0 +1,22 @@
+[
+    {
+        "aanvraagID": "1",
+        "voornaam": "Billy",
+        "achternaam": "Bob",
+        "bsn": "123456789",
+        "aanvraagType": "rijbewijs",
+        "datum": "08/12/2022",
+        "tijd": "12:55",
+        "detail": "Hallo ik ben billy bob en ik kan niet autorijden maar morgen heb ik een feest waar we veel gaan zuipen en ik heb geen zin om met de trein te gaan dus ik wil met de auto heen en terug rijden"
+    },
+    {
+        "aanvraagID": "2",
+        "voornaam": "Bob",
+        "achternaam": "BBilly",
+        "bsn": "0000000000",
+        "aanvraagType": "Sigma male certificate",
+        "datum": "25/05/2022",
+        "tijd": "12:57",
+        "detail": "Among us sussus gigachad"
+    }
+]    

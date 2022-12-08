@@ -23,8 +23,7 @@
     let selectionStatus: number | undefined = undefined;
 </script>
 
-<h1>Aanvragen</h1>
-<p>*hier kan je een lijst zien van alle aanvragen*</p>
+<h1>Aanvragen (2e manier)</h1>
 
 <div>
     <List class="demo-list"
