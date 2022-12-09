@@ -24,21 +24,21 @@ BSN: {item.bsn} <br>
     SortValue,
   } from '@smui/data-table';
   import IconButton from '@smui/icon-button';
-
   import item from '../../lib/data.json';
 
   type Aanvraag = {
-    aanvraagID: number;
+    // aanvraagID: number;
     aanvraagType: string;
     datum: string;
     tijd: string;
   };
   let items: Aanvraag[] = [];
-  let sort: keyof Aanvraag = 'aanvraagID';
+  let sort: keyof Aanvraag = 'datum';
   let sortDirection: Lowercase<keyof typeof SortValue> = 'ascending';
 
   if (typeof item !== 'undefined') {
     fetch(
+      // 'https://gist.githubusercontent.com/hperrin/e24a4ebd9afdf2a8c283338ae5160a62/raw/dcbf8e6382db49b0dcab70b22f56b1cc444f26d4/users.json'
       'src/lib/data.json'
     )
       .then((response) => response.json())
@@ -82,11 +82,11 @@ BSN: {item.bsn} <br>
           "sortAscendingAriaLabel" and
           "sortDescendingAriaLabel" props on the DataTable.
       -->
-      <Cell numeric columnId="id">
+      <!-- <Cell numeric columnId="id">
           <!-- For numeric columns, icon comes first. -->
-          <IconButton class="material-icons">arrow_upward</IconButton>
-          <Label>Aanvraag ID</Label>
-      </Cell>
+          <!-- <IconButton class="material-icons">arrow_upward</IconButton>
+          <Label>Aanvraag ID</Label> --> 
+      <!-- </Cell> -->
       <Cell columnId="aanvraagType" style="width: 100%;">
           <Label>Aanvraag</Label>
           <!-- For non-numeric columns, icon comes second. -->
@@ -105,14 +105,14 @@ BSN: {item.bsn} <br>
       </Row>
   </Head>
   <Body>
-      {#each items as item (item.aanvraagID)}
-      <Row>
-          <Cell numeric>{item.aanvraagID}</Cell>
-          <Cell>{item.aanvraagType}</Cell>
-          <Cell>{item.datum}</Cell>
-          <Cell>{item.tijd}</Cell>
-          <!-- <Cell>{item.website}</Cell> -->
-      </Row>
+      {#each items as item (item.datum)}
+        <Row>
+            <!-- <Cell numeric>{item.aanvraagID}</Cell> -->
+            <Cell on:click={() => alert("details van: " + item.aanvraagType)}>{item.aanvraagType}</Cell>
+            <Cell>{item.datum}</Cell>
+            <Cell>{item.tijd}</Cell>
+            <!-- <Cell>{item.website}</Cell> -->
+        </Row>
       {/each}
   </Body>
   </DataTable>
