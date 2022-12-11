@@ -14,7 +14,7 @@ BSN: {item.bsn} <br>
 
 	type Aanvraag = {
 		id: number;
-		fromUser: string;
+		// fromUser: string;
 		requestText: string;
 		date: number;
 	};
@@ -43,6 +43,11 @@ BSN: {item.bsn} <br>
 		});
 		items = items;
 	}
+
+	function unixConvertion(unixTimestamp: number) {
+		const date: Date = new Date(unixTimestamp / 1000);
+		return date;
+	}
 </script>
 
 <!-- <script>
@@ -64,11 +69,15 @@ BSN: {item.bsn} <br>
 	>
 		<Head>
 			<Row>
+				<!-- <Cell numeric columnId="id">
+					<IconButton class="material-icons">arrow_upward</IconButton>
+					<Label>Aanvraag ID</Label>
+				</Cell> -->
 				<Cell columnId="requestText" style="width: 100%;">
 					<Label>Aanvraag</Label>
 					<IconButton class="material-icons">arrow_upward</IconButton>
 				</Cell>
-				<Cell columnId="date">
+				<Cell numeric columnId="date">
 					<Label>Datum</Label>
 					<IconButton class="material-icons">arrow_upward</IconButton>
 				</Cell>
@@ -76,11 +85,11 @@ BSN: {item.bsn} <br>
 		</Head>
 
 		<Body>
-			{#each items as item (item.date)}
+			{#each items as item (item.id)}
 				<Row>
-					<!-- <Cell numeric>{item.aanvraagID}</Cell> -->
+					<!-- <Cell numeric>{item.id}</Cell> -->
 					<Cell on:click={() => alert('details van: ' + item.requestText)}>{item.requestText}</Cell>
-					<Cell>{item.date}</Cell>
+					<Cell numeric>{unixConvertion(item.date)}</Cell>
 					<!-- <Cell>{item.website}</Cell> -->
 				</Row>
 			{/each}
