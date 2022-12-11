@@ -46,7 +46,10 @@
 		"@smui/data-table": "^7.0.0-beta.0",
 		"@smui/fab": "^7.0.0-beta.0",
 		"@smui/linear-progress": "^7.0.0-beta.0",
+		"axios": "^1.2.1",
+		"konsta": "^1.0.2",
 		"svelte-routing": "^1.6.0",
+		"svelte-simple-modal": "^1.4.5",
 		"svelte-spa-router": "^3.3.0",
 		"svg": "^0.1.0"
 	}
