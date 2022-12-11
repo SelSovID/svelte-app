@@ -17,9 +17,7 @@
 			{ withCredentials: true, headers: { Authorization: `Bearer ${wachtwoord}` } }
 		);
 
-		if (response.status === 200) {
-			axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-
+		if (response.status === 201) {
 			await push('/');
 		}
 	};

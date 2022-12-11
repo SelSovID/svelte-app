@@ -1,6 +1,10 @@
 ## Svelte-app README
 
 ### starten van de svelte-app
+Clone je repository naar een lokale folder en voer het volgende commando uit in de terminal:
+```console
+npm install
+```
 Om de svelte-app te starten moet je in de terminal het volgende typen in de terminal:
 ```console
 npm run dev
