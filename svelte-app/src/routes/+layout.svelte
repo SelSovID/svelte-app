@@ -6,12 +6,15 @@
     AutoAdjust,
   } from '@smui/top-app-bar';
   import IconButton from '@smui/icon-button';
+  import Button from '@smui/button';
+  import {getContext} from "svelte";
 
   let topAppBar: TopAppBar;
 
   let darkTheme: boolean | undefined = undefined;
   let clicked = 0;
-  import Button from '@smui/button';
+  // let loggedIn = getContext("loginContext")
+  let loggedIn = false;
 
   // onMount(() => {
   //   darkTheme = window.matchMedia('(prefers-color-scheme: dark)');
@@ -39,16 +42,21 @@
 
     <Section>
       <Button on:click={() => clicked++} href="/aanvragen">aanvragen</Button>
-      <Button on:click={() => clicked++} href="/aanvragen2">aanvragen 2</Button>
-      <Button on:click={() => clicked++} href="/leeg">lege pagina</Button>
     </Section>
 
     <Section align="end" toolbar>
+      {#if loggedIn === true}
+      <Button color="secondary" on:click={() => clicked++} variant="raised" href="/account">account</Button> 
+      {:else if loggedIn === false}
+      <Button color="secondary" on:click={() => clicked++} variant="raised" href="/login">login</Button> 
+      <!-- <Button color="secondary" on:click={() => clicked++} variant="raised" href="/registreer">registreer</Button>  -->
+      {/if}
       <IconButton on:click={() => (darkTheme = !darkTheme)} class="material-icons"> 
         {#if darkTheme === undefined}nightlight{:else if darkTheme === true}sunny{:else}nightlight{/if} 
       </IconButton>
     </Section>
   </Row>
+
 </TopAppBar>
 <AutoAdjust {topAppBar}>
   <slot></slot>
