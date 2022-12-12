@@ -46,7 +46,7 @@ BSN: {item.bsn} <br>
 	}
 
 	function unixConvertion(unixTimestamp: number) {
-		const date: Date = new Date(unixTimestamp / 1000);
+		const date: Date = new Date(unixTimestamp);
 		return date;
 	}
 </script>
