@@ -32,7 +32,7 @@
 	<Row>
 		<Section>
 			<IconButton on:click={() => clicked++} href="/" class="material-icons">home</IconButton>
-			<Title>SelSolvID</Title>
+			<Title>SelSovID</Title>
 		</Section>
 
 		<Section>
