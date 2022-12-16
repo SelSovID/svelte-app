@@ -8,20 +8,23 @@ BSN: {item.bsn} <br>
     <br>
 {/each} -->
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import Button from '@smui/button/src/Button.svelte';
 	import DataTable, { Head, Body, Row, Cell, Label, SortValue } from '@smui/data-table';
 	import IconButton from '@smui/icon-button';
 
 	type Aanvraag = {
-    id: number;
-    // fromUser: string;
-    requestText: string;
-    date: number;
-  }
-	export let data: {items: Aanvraag[]};
+		id: number;
+		// fromUser: string;
+		requestText: string;
+		date: number;
+	};
+	export let data: { items: Aanvraag[] };
 
 	const items = data.items;
 	let sort: keyof Aanvraag = 'date';
 	let sortDirection: Lowercase<keyof typeof SortValue> = 'ascending';
+	let clicked = 0;
 
 	function handleSort() {
 		items.sort((a, b) => {
@@ -60,10 +63,6 @@ BSN: {item.bsn} <br>
 	>
 		<Head>
 			<Row>
-				<!-- <Cell numeric columnId="id">
-					<IconButton class="material-icons">arrow_upward</IconButton>
-					<Label>Aanvraag ID</Label>
-				</Cell> -->
 				<Cell columnId="requestText" style="width: 100%;">
 					<Label>Aanvraag</Label>
 					<IconButton class="material-icons">arrow_upward</IconButton>
@@ -78,8 +77,13 @@ BSN: {item.bsn} <br>
 		<Body>
 			{#each items as item (item.id)}
 				<Row>
+					<!-- <IconButton on:click={() => clicked++} href="/aanvragen/{item.id}" class="material-icons"
+						>info</IconButton
+					> -->
 					<!-- <Cell numeric>{item.id}</Cell> -->
-					<Cell on:click={() => alert('details van: ' + item.requestText)}>{item.requestText}</Cell>
+					<!-- <Cell on:click={() => alert('details van: ' + item.requestText)}>{item.requestText}</Cell> -->
+					<!-- <Cell>{item.requestText}</Cell> -->
+					<Cell on:click={() => goto(`/aanvragen/${item.id}`)}>{item.requestText}</Cell>
 					<Cell numeric>{unixConvertion(item.date)}</Cell>
 					<!-- <Cell>{item.website}</Cell> -->
 				</Row>
