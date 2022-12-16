@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Button from '@smui/button/src/Button.svelte';
 	import Textfield from '@smui/textfield';
 	import HelperText from '@smui/textfield/helper-text';
@@ -18,7 +19,7 @@
 		);
 
 		if (response.status === 201) {
-			await push('/');
+			goto('/');
 		}
 	};
 </script>
