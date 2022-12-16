@@ -1,15 +1,5 @@
-<!-- Naam: {item.voornaam} {item.achternaam} <br>
-BSN: {item.bsn} <br>
-<br>
-{#each item.aanvragen as aanvraag}
-    {aanvraag.titel}:<br>
-    detail: {aanvraag.detail} <br>
-    tijd: {aanvraag.tijd} | {aanvraag.datum} <br>
-    <br>
-{/each} -->
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '@smui/button/src/Button.svelte';
 	import DataTable, { Head, Body, Row, Cell, Label, SortValue } from '@smui/data-table';
 	import IconButton from '@smui/icon-button';
 
@@ -44,12 +34,6 @@ BSN: {item.bsn} <br>
 	}
 </script>
 
-<!-- <script>
-  import item from '../../lib/data.json';
-</script> -->
-
-<!-- The "item" variable can be treated like a parsed object: -->
-
 <main>
 	<h1>Aanvragen</h1>
 
@@ -77,15 +61,8 @@ BSN: {item.bsn} <br>
 		<Body>
 			{#each items as item (item.id)}
 				<Row>
-					<!-- <IconButton on:click={() => clicked++} href="/aanvragen/{item.id}" class="material-icons"
-						>info</IconButton
-					> -->
-					<!-- <Cell numeric>{item.id}</Cell> -->
-					<!-- <Cell on:click={() => alert('details van: ' + item.requestText)}>{item.requestText}</Cell> -->
-					<!-- <Cell>{item.requestText}</Cell> -->
 					<Cell on:click={() => goto(`/aanvragen/${item.id}`)}>{item.requestText}</Cell>
 					<Cell numeric>{unixConvertion(item.date)}</Cell>
-					<!-- <Cell>{item.website}</Cell> -->
 				</Row>
 			{/each}
 		</Body>

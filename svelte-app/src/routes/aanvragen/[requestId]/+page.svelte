@@ -1,5 +1,4 @@
 <script lang="ts">
-	import IconButton from '@smui/icon-button';
 	import Fab, { Label, Icon } from '@smui/fab';
 
 	type Aanvraag = {

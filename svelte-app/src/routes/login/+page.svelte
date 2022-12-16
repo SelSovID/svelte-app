@@ -2,10 +2,8 @@
 	import { goto } from '$app/navigation';
 	import Button from '@smui/button/src/Button.svelte';
 	import Textfield from '@smui/textfield';
-	import HelperText from '@smui/textfield/helper-text';
 
 	import axios from 'axios';
-	import { push } from 'svelte-spa-router';
 
 	let email = '';
 	let wachtwoord = '';
