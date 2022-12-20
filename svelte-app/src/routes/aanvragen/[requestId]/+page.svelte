@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Fab, { Label, Icon } from '@smui/fab';
 	import axios from 'axios';
 
@@ -16,6 +17,14 @@
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
 		return date;
+	}
+
+	async function handleRequest(id: number, accept: boolean) {
+		const response = await axios.put(`/api/request/${items.id}`, { accept });
+		if (response.status === 200) {
+			goto('/aanvragen');
+			return response;
+		}
 	}
 </script>
 
@@ -36,15 +45,11 @@
 	<br />
 	<p>{items.requestText}</p>
 	<!-- "accept": false -->
-	<Fab
-		color="primary"
-		on:click={() => axios.put(`/api/request/${items.id}`, { accept: true })}
-		extended
-	>
+	<Fab color="primary" on:click={() => handleRequest(items.id, true)} extended>
 		<Icon class="material-icons">done</Icon>
 		<Label>goedkeuren</Label>
 	</Fab>
-	<Fab color="primary" on:click={() => axios.put(`/api/request/${items.id}`, { accept: false })}>
+	<Fab color="primary" on:click={() => handleRequest(items.id, false)} extended>
 		<Icon class="material-icons">close</Icon>
 		<Label>afkeuren</Label>
 	</Fab>
