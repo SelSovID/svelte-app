@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Fab, { Label, Icon } from '@smui/fab';
+	import axios from 'axios';
 
 	type Aanvraag = {
 		id: number;
@@ -34,12 +35,16 @@
 	<h3>{unixConvertion(items.date)}</h3>
 	<br />
 	<p>{items.requestText}</p>
-
-	<Fab color="primary" on:click={() => alert(items.fromUser.email + ' goedgekeurd')} extended>
+	<!-- "accept": false -->
+	<Fab
+		color="primary"
+		on:click={() => axios.put(`/api/request/${items.id}`, { accept: true })}
+		extended
+	>
 		<Icon class="material-icons">done</Icon>
 		<Label>goedkeuren</Label>
 	</Fab>
-	<Fab color="primary" on:click={() => alert(items.fromUser.email + ' afgekeurd')} extended>
+	<Fab color="primary" on:click={() => axios.put(`/api/request/${items.id}`, { accept: false })}>
 		<Icon class="material-icons">close</Icon>
 		<Label>afkeuren</Label>
 	</Fab>

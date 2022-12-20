@@ -2,7 +2,6 @@
 	import TopAppBar, { Row, Section, Title, AutoAdjust } from '@smui/top-app-bar';
 	import IconButton from '@smui/icon-button';
 	import Button from '@smui/button';
-	import { getContext } from 'svelte';
 
 	let topAppBar: TopAppBar;
 
