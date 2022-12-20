@@ -43,7 +43,7 @@
 		bind:sortDirection
 		on:SMUIDataTable:sorted={handleSort}
 		table$aria-label="Aanvraag list"
-		style="width: 50%;"
+		style="width: 75%;"
 	>
 		<Head>
 			<Row>
