@@ -1,0 +1,21 @@
+{
+	"": [],
+	"aanvragen2": [],
+	"aanvragen": [
+		"src/routes/aanvragen/+page.js"
+	],
+	"leeg": [],
+	"login": [],
+	"register": [],
+	"account": [],
+	"registreer": [],
+	"account/[requestId]": [
+		"src/routes/account/[requestId]/+page.js"
+	],
+	"aanvragen/[requestId]": [
+		"src/routes/aanvragen/[requestId]/+page.js"
+	],
+	"aanvragen/[requestID]": [
+		"src/routes/aanvragen/[requestID]/+page.js"
+	]
+}
