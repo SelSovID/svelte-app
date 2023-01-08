@@ -2,6 +2,9 @@
 	import { goto } from '$app/navigation';
 	import Fab, { Label, Icon } from '@smui/fab';
 	import axios from 'axios';
+	import Textfield from '@smui/textfield';
+	// import HelperText from '@smui/textfield/helper-text';
+	import Button from '@smui/button/src/Button.svelte';
 
 	type Aanvraag = {
 		id: number;
@@ -13,6 +16,8 @@
 	let clicked = 0;
 	export let data: { items: Aanvraag[] };
 	const items = data.items;
+	let showForm = false;
+	let value = '';
 
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
@@ -49,10 +54,37 @@
 		<Icon class="material-icons">done</Icon>
 		<Label>goedkeuren</Label>
 	</Fab>
-	<Fab color="primary" on:click={() => handleRequest(items.id, false)} extended>
+	<Fab color="primary" on:click={() => (showForm = true)} extended>
+		<!-- on:click={() => handleRequest(items.id, false)} -->
 		<Icon class="material-icons">close</Icon>
 		<Label>afkeuren</Label>
 	</Fab>
+
+	{#if showForm === true}
+		<br />
+		<br />
+		<br />
+		<div class="margins">
+			<Textfield
+				style="width: 75%;"
+				helperLine$style="width: 75%;"
+				textarea
+				bind:value
+				label="redenn van afkeuring"
+			>
+				<!-- <HelperText slot="helper">Helper Text</HelperText> -->
+			</Textfield>
+		</div>
+		<br />
+		<div>
+			<Button
+				color="primary"
+				on:click={() => handleRequest(items.id, false)}
+				variant="raised"
+				type="submit">versturen</Button
+			>
+		</div>
+	{/if}
 </main>
 
 <style>
