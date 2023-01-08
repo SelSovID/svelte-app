@@ -8,7 +8,7 @@
 	<h1>Hallo</h1>
 
 	<p>
-		among us
+		tekst
 		<Button color="secondary" on:click={() => clicked++} variant="raised" href="/">logout</Button>
 	</p>
 </main>

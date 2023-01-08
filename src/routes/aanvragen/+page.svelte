@@ -12,9 +12,9 @@
 	export let data: { items: Aanvraag[] };
 
 	const items = data.items;
+
 	let sort: keyof Aanvraag = 'date';
 	let sortDirection: Lowercase<keyof typeof SortValue> = 'ascending';
-	let clicked = 0;
 
 	function handleSort() {
 		items.sort((a, b) => {
