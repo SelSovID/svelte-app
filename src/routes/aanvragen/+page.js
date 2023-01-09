@@ -15,7 +15,7 @@ export async function load({ fetch }) {
         // moet nog iets werkends hebben dat je redirect naar login als je niet bent ingelogd
         // als hij niet iets kan fetchen en dus een status van 401 heeft, dan is hij dus niet ingelogd
         return {
-            items: data
+            items: ""
         }
     }
 }

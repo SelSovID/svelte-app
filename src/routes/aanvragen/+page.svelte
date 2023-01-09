@@ -12,6 +12,10 @@
 	export let data: { items: Aanvraag[] };
 
 	const items = data.items;
+	// als items een length van 0 heeft, dus leeg is, dan is er geen data ingeladen en dus ben je niet ingelogd
+	if (items.length === 0) {
+		goto('/login');
+	}
 
 	let sort: keyof Aanvraag = 'date';
 	let sortDirection: Lowercase<keyof typeof SortValue> = 'ascending';
