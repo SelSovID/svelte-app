@@ -12,10 +12,7 @@
 	export let data: { items: Aanvraag[] };
 
 	const items = data.items;
-	// als items een length van 0 heeft, dus leeg is, dan is er geen data ingeladen en dus ben je niet ingelogd
-	if (items.length === 0) {
-		goto('/login');
-	}
+	checkLoggedIn();
 
 	let sort: keyof Aanvraag = 'date';
 	let sortDirection: Lowercase<keyof typeof SortValue> = 'ascending';
@@ -35,6 +32,13 @@
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
 		return date;
+	}
+
+	async function checkLoggedIn() {
+		const response = await fetch('/api/request');
+		if (response.status != 200) {
+			goto('/login');
+		}
 	}
 </script>
 
