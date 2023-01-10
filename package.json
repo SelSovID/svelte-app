@@ -45,9 +45,11 @@
 	"dependencies": {
 		"@headlessui/react": "^1.7.3",
 		"@smui/data-table": "^7.0.0-beta.0",
+		"@smui/drawer": "^7.0.0-beta.0",
 		"@smui/fab": "^7.0.0-beta.0",
 		"@smui/linear-progress": "^7.0.0-beta.0",
 		"axios": "^1.2.1",
+		"carbon-components-svelte": "^0.71.0",
 		"konsta": "^1.0.2",
 		"svelte-routing": "^1.6.0",
 		"svelte-simple-modal": "^1.4.5",

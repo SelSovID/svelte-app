@@ -12,7 +12,7 @@
 	export let data: { items: Aanvraag[] };
 
 	const items = data.items;
-	checkLoggedIn();
+	// checkLoggedIn();
 
 	let sort: keyof Aanvraag = 'date';
 	let sortDirection: Lowercase<keyof typeof SortValue> = 'ascending';
@@ -34,12 +34,12 @@
 		return date;
 	}
 
-	async function checkLoggedIn() {
-		const response = await fetch('/api/request');
-		if (response.status != 200) {
-			goto('/login');
-		}
-	}
+	// async function checkLoggedIn() {
+	// 	const response = await fetch('/api/request');
+	// 	if (response.status != 200) {
+	// 		goto('/login');
+	// 	}
+	// }
 </script>
 
 <main>

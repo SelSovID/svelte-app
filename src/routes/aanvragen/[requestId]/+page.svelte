@@ -3,17 +3,20 @@
 	import Fab, { Label, Icon } from '@smui/fab';
 	import axios from 'axios';
 	import Textfield from '@smui/textfield';
-	// import HelperText from '@smui/textfield/helper-text';
 	import Button from '@smui/button/src/Button.svelte';
+	import Drawer, { AppContent, Content } from '@smui/drawer';
+	import List, { Item, Text } from '@smui/list';
 
 	type Aanvraag = {
 		id: number;
 		fromUser: string;
 		requestText: string;
 		date: number;
+		attachedVCs: string;
 	};
 
-	let clicked = 0;
+	let clicked = 'nothing yet';
+	let clicked2 = 0;
 	export let data: { items: Aanvraag[] };
 	const items = data.items;
 	let showForm = false;
@@ -31,13 +34,14 @@
 			return response;
 		}
 	}
+	console.log(items.attachedVCs);
 </script>
 
 <br />
 
 <div class="flexy">
 	<div class="margins">
-		<Fab on:click={() => clicked++} href="/aanvragen" extended>
+		<Fab on:click={() => clicked2++} href="/aanvragen" extended>
 			<Icon class="material-icons">arrow_back</Icon>
 			<Label>terug</Label>
 		</Fab>
@@ -47,8 +51,35 @@
 <main>
 	<h1>{items.fromUser.email}</h1>
 	<h3>{unixConvertion(items.date)}</h3>
-	<br />
 	<p>{items.requestText}</p>
+
+	<!-- <p>{items.attachedVCs}</p> -->
+	<br />
+	Meegeleverde VC's bij deze aanvraag:
+	<div class="drawer-container">
+		<Drawer>
+			<Content>
+				<List>
+					{#each items as item (item.id)}
+						<!-- a -->
+					{/each}
+					<Item href="javascript:void(0)" on:click={() => (clicked = items.attachedVCs)}>
+						<Text>aaaaaaa</Text>
+					</Item>
+				</List>
+			</Content>
+		</Drawer>
+
+		<AppContent class="app-content">
+			<main class="main-content">
+				VC details:
+				<br />
+				<pre class="status">{clicked}</pre>
+			</main>
+		</AppContent>
+	</div>
+
+	<br />
 	<!-- "accept": false -->
 	<Fab color="primary" on:click={() => handleRequest(items.id, true)} extended>
 		<Icon class="material-icons">done</Icon>
@@ -63,14 +94,13 @@
 	{#if showForm === true}
 		<br />
 		<br />
-		<br />
 		<div class="margins">
 			<Textfield
 				style="width: 75%;"
 				helperLine$style="width: 75%;"
 				textarea
 				bind:value
-				label="redenn van afkeuring"
+				label="reden van afkeuring"
 			>
 				<!-- <HelperText slot="helper">Helper Text</HelperText> -->
 			</Textfield>
@@ -91,5 +121,32 @@
 	main {
 		font-family: sans-serif;
 		text-align: center;
+	}
+
+	/* These classes are only needed because the
+	  drawer is in a container on the page. */
+	.drawer-container {
+		position: relative;
+		display: flex;
+		height: 350px;
+		max-width: 600px;
+		border: 1px solid gray;
+		overflow: hidden;
+		z-index: 0;
+		margin: auto;
+	}
+
+	* :global(.app-content) {
+		flex: auto;
+		overflow: auto;
+		position: relative;
+		flex-grow: 1;
+	}
+
+	.main-content {
+		overflow: auto;
+		padding: 16px;
+		height: 100%;
+		box-sizing: border-box;
 	}
 </style>
