@@ -6,7 +6,6 @@
 	import Button from '@smui/button/src/Button.svelte';
 	import Drawer, { AppContent, Content } from '@smui/drawer';
 	import List, { Item, Text } from '@smui/list';
-	import IconButton from '@smui/icon-button';
 	import green_checkmark from '../../../lib/green_checkmark.png';
 
 	type Aanvraag = {
@@ -148,7 +147,7 @@
 	.drawer-container {
 		position: relative;
 		display: flex;
-		height: 350px;
+		height: auto;
 		max-width: 600px;
 		border: 1px solid var(--mdc-theme-text-hint-on-background, grey);
 		overflow: hidden;

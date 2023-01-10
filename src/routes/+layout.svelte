@@ -34,9 +34,11 @@
 			<Title>SelSovID</Title>
 		</Section>
 
-		<Section>
-			<Button on:click={() => clicked++} href="/aanvragen">aanvragen</Button>
-		</Section>
+		<main>
+			<Section>
+				<Button on:click={() => clicked++} href="/aanvragen">aanvragen</Button>
+			</Section>
+		</main>
 
 		<Section align="end" toolbar>
 			{#if loggedIn === true}
@@ -58,3 +60,11 @@
 <AutoAdjust {topAppBar}>
 	<slot />
 </AutoAdjust>
+
+<style>
+	main {
+		font-family: sans-serif;
+		text-align: center;
+		margin: auto;
+	}
+</style>
