@@ -43,7 +43,7 @@
 </script>
 
 <main>
-	<h1>Aanvragen</h1>
+	<h1><!-- --></h1>
 
 	<DataTable
 		sortable
