@@ -6,6 +6,8 @@
 	import Button from '@smui/button/src/Button.svelte';
 	import Drawer, { AppContent, Content } from '@smui/drawer';
 	import List, { Item, Text } from '@smui/list';
+	import IconButton from '@smui/icon-button';
+	import green_checkmark from '../../../lib/green_checkmark.png';
 
 	type Aanvraag = {
 		id: number;
@@ -15,8 +17,8 @@
 		attachedVCs: string;
 	};
 
-	let clicked = 'nothing yet';
-	let clicked2 = 0;
+	let selectedVC = 'nothing selected yet';
+	let clicked = 0;
 	export let data: { items: Aanvraag[] };
 	const items = data.items;
 	let showForm = false;
@@ -41,7 +43,7 @@
 
 <div class="flexy">
 	<div class="margins">
-		<Fab on:click={() => clicked2++} href="/aanvragen" extended>
+		<Fab on:click={() => clicked++} href="/aanvragen" extended>
 			<Icon class="material-icons">arrow_back</Icon>
 			<Label>terug</Label>
 		</Fab>
@@ -55,16 +57,34 @@
 
 	<!-- <p>{items.attachedVCs}</p> -->
 	<br />
-	Meegeleverde VC's bij deze aanvraag:
+	Meegeleverde VCs bij deze aanvraag:
 	<div class="drawer-container">
 		<Drawer>
 			<Content>
 				<List>
+					<!-- de img is een green checkmark, deze staat hardcoded omdat de VCs al worden gechecked in de API -->
 					{#each items as item (item.id)}
-						<!-- a -->
+						<!-- moet nog automatisch items aangemaakt worden wanneer de attachedVCs geformat zijn -->
 					{/each}
-					<Item href="javascript:void(0)" on:click={() => (clicked = items.attachedVCs)}>
-						<Text>aaaaaaa</Text>
+					<Item href="javascript:void(0)" on:click={() => (selectedVC = items.attachedVCs)}>
+						<Text
+							>aaaaaaa <img
+								src={green_checkmark}
+								alt="green checkmark"
+								width="12px"
+								height="12px"
+							/></Text
+						>
+					</Item>
+					<Item href="javascript:void(0)" on:click={() => (selectedVC = 'blablabla')}>
+						<Text
+							>bbbb <img
+								src={green_checkmark}
+								alt="green checkmark"
+								width="12px"
+								height="12px"
+							/></Text
+						>
 					</Item>
 				</List>
 			</Content>
@@ -74,7 +94,7 @@
 			<main class="main-content">
 				VC details:
 				<br />
-				<pre class="status">{clicked}</pre>
+				<pre class="status">{selectedVC}</pre>
 			</main>
 		</AppContent>
 	</div>
@@ -130,7 +150,7 @@
 		display: flex;
 		height: 350px;
 		max-width: 600px;
-		border: 1px solid gray;
+		border: 1px solid var(--mdc-theme-text-hint-on-background, grey);
 		overflow: hidden;
 		z-index: 0;
 		margin: auto;
