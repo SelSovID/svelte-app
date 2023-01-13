@@ -31,6 +31,7 @@
 	let showForm = false;
 	let value = '';
 	let VCdata = items.attachedVCs.map((vc) => JSON.parse(vc) as SSICertJSON);
+	let showVCs = false;
 
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
@@ -61,37 +62,44 @@
 	<h1>{items.fromUser.email}</h1>
 	<h3>{unixConvertion(items.date)}</h3>
 	<p>{items.requestText}</p>
-
 	<br />
-	Meegeleverde VCs bij deze aanvraag:
-	<div class="drawer-container">
-		<Drawer>
-			<Content>
-				<List>
-					<!-- de img is een green checkmark, deze staat hardcoded omdat de VCs al worden gechecked in de API -->
-					{#each VCdata as VC}
-						<Item
-							href="javascript:void(0)"
-							on:click={() => (selectedVC = VC[2].credentialText.split('\n\n')[1])}
-						>
-							<Text
-								>{VC[2].credentialText.split('\n\n')[0]}
-								<img src={green_checkmark} alt="green checkmark" width="12px" height="12px" /></Text
+	<Button color="primary" on:click={() => (showVCs = !showVCs)} variant="raised"
+		>Lijst met VC's</Button
+	>
+	<br /><br />
+	{#if showVCs === true}
+		<div class="drawer-container">
+			<Drawer>
+				<Content>
+					<List>
+						<!-- de img is een green checkmark, deze staat hardcoded omdat de VCs al worden gechecked in de API -->
+						{#each VCdata as VC}
+							<Item
+								href="javascript:void(0)"
+								on:click={() => (selectedVC = VC[2].credentialText.split('\n\n')[1])}
 							>
-						</Item>
-					{/each}
-				</List>
-			</Content>
-		</Drawer>
+								<Text
+									>{VC[2].credentialText.split('\n\n')[0]}
+									<img
+										src={green_checkmark}
+										alt="green checkmark"
+										width="12px"
+										height="12px"
+									/></Text
+								>
+							</Item>
+						{/each}
+					</List>
+				</Content>
+			</Drawer>
 
-		<AppContent class="app-content">
-			<main class="main-content">
-				VC details:
-				<br /><br />
-				{selectedVC}
-			</main>
-		</AppContent>
-	</div>
+			<AppContent class="app-content">
+				<main class="main-content">
+					{selectedVC}
+				</main>
+			</AppContent>
+		</div>
+	{/if}
 
 	<br />
 	<!-- "accept": false -->
@@ -99,7 +107,7 @@
 		<Icon class="material-icons">done</Icon>
 		<Label>goedkeuren</Label>
 	</Fab>
-	<Fab color="primary" on:click={() => (showForm = true)} extended>
+	<Fab color="primary" on:click={() => (showForm = !showForm)} extended>
 		<!-- on:click={() => handleRequest(items.id, false)} -->
 		<Icon class="material-icons">close</Icon>
 		<Label>afkeuren</Label>
