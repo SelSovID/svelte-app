@@ -170,9 +170,4 @@
 		box-sizing: border-box;
 		overflow-wrap: break-word;
 	}
-
-	.wrap {
-		max-width: 120px;
-		overflow-wrap: break-word;
-	}
 </style>

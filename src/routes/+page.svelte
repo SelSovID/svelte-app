@@ -1,10 +1,8 @@
 <script>
-	import bruh from '../lib/bruh.png';
 	import hanzelogo from '../lib/hanzelogo.png';
 	import hanzelogo_wit from '../lib/hanzelogo-wit.png';
-	import hanzegif from '../lib/hanze-hanze-experience.gif';
-	import dit_lab_wit from '../lib/dit-lab-wit.png';
 	import dit_lab_zwart from '../lib/dit-lab-zwart.png';
+	import dit_lab_wit from '../lib/dit-lab-wit.png';
 </script>
 
 <main>

@@ -5,10 +5,10 @@
 </script>
 
 <main>
-	<h1>Hallo</h1>
+	<h1>*placeholder titel*</h1>
 
 	<p>
-		tekst
+		*placeholder tekst*
 		<Button color="secondary" on:click={() => clicked++} variant="raised" href="/">logout</Button>
 	</p>
 </main>
