@@ -7,26 +7,33 @@
 	import Drawer, { AppContent, Content } from '@smui/drawer';
 	import List, { Item, Text } from '@smui/list';
 	import green_checkmark from '../../../lib/green_checkmark.png';
-	import { each } from 'svelte/internal';
+
+	type SSICertJSON = [
+		{ parent: string | null },
+		{ publicKey: string },
+		{ credentialText: string },
+		{ ownerSignature: string | null },
+		{ parentSignature: string | null }
+	];
 
 	type Aanvraag = {
 		id: number;
 		fromUser: string;
 		requestText: string;
 		date: number;
-		attachedVCs: string;
+		attachedVCs: string[];
 	};
 
 	let selectedVC = 'nothing selected yet';
 	let clicked = 0;
-	export let data: { items: Aanvraag[] };
+	export let data: { items: Aanvraag };
 	const items = data.items;
 	let showForm = false;
 	let value = '';
-	let VCdata = items.attachedVCs.toString();
-	let VCarray: string | any[] = [];
+	let VCdata = items.attachedVCs.map((vc) => JSON.parse(vc) as SSICertJSON);
+	// let VCarray: string | any[] = [];
 
-	VCdata = VCdata.split(',');
+	// VCdata = VCdata.split(',');
 
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
@@ -58,11 +65,11 @@
 	<h3>{unixConvertion(items.date)}</h3>
 	<p>{items.requestText}</p>
 
-	{#each VCdata as data}
+	<!-- {#each VCdata as data}
 		{#if data.includes('credentialText')}
 			{VCarray.push(data)}
 		{/if}
-	{/each}
+	{/each} -->
 
 	<br />
 	Meegeleverde VCs bij deze aanvraag:
@@ -71,16 +78,12 @@
 			<Content>
 				<List>
 					<!-- de img is een green checkmark, deze staat hardcoded omdat de VCs al worden gechecked in de API -->
-					{#each VCarray as VC}
+					{#each VCdata as VC}
 						<!-- moet nog automatisch items aangemaakt worden wanneer de attachedVCs geformat zijn -->
-						<Item href="javascript:void(0)" on:click={() => (selectedVC = VC)}>
+						<Item href="javascript:void(0)" on:click={() => (selectedVC = VC[2].credentialText)}>
 							<Text
-								>VC <img
-									src={green_checkmark}
-									alt="green checkmark"
-									width="12px"
-									height="12px"
-								/></Text
+								>VC
+								<img src={green_checkmark} alt="green checkmark" width="12px" height="12px" /></Text
 							>
 						</Item>
 					{/each}
