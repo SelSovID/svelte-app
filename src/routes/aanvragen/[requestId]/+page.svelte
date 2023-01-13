@@ -31,7 +31,6 @@
 	let showForm = false;
 	let value = '';
 	let VCdata = items.attachedVCs.map((vc) => JSON.parse(vc) as SSICertJSON);
-	let showVCs = false;
 
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
@@ -63,43 +62,33 @@
 	<h3>{unixConvertion(items.date)}</h3>
 	<p>{items.requestText}</p>
 	<br />
-	<Button color="primary" on:click={() => (showVCs = !showVCs)} variant="raised"
-		>Lijst met VC's</Button
-	>
-	<br /><br />
-	{#if showVCs === true}
-		<div class="drawer-container">
-			<Drawer>
-				<Content>
-					<List>
-						<!-- de img is een green checkmark, deze staat hardcoded omdat de VCs al worden gechecked in de API -->
-						{#each VCdata as VC}
-							<Item
-								href="javascript:void(0)"
-								on:click={() => (selectedVC = VC[2].credentialText.split('\n\n')[1])}
+	Meegeleverde VCs bij deze aanvraag:
+	<div class="drawer-container">
+		<Drawer>
+			<Content>
+				<List>
+					<!-- de img is een green checkmark, deze staat hardcoded omdat de VCs al worden gechecked in de API -->
+					{#each VCdata as VC}
+						<Item
+							href="javascript:void(0)"
+							on:click={() => (selectedVC = VC[2].credentialText.split('\n\n')[1])}
+						>
+							<Text
+								>{VC[2].credentialText.split('\n\n')[0]}
+								<img src={green_checkmark} alt="green checkmark" width="12px" height="12px" /></Text
 							>
-								<Text
-									>{VC[2].credentialText.split('\n\n')[0]}
-									<img
-										src={green_checkmark}
-										alt="green checkmark"
-										width="12px"
-										height="12px"
-									/></Text
-								>
-							</Item>
-						{/each}
-					</List>
-				</Content>
-			</Drawer>
+						</Item>
+					{/each}
+				</List>
+			</Content>
+		</Drawer>
 
-			<AppContent class="app-content">
-				<main class="main-content">
-					{selectedVC}
-				</main>
-			</AppContent>
-		</div>
-	{/if}
+		<AppContent class="app-content">
+			<main class="main-content">
+				{selectedVC}
+			</main>
+		</AppContent>
+	</div>
 
 	<br />
 	<!-- "accept": false -->

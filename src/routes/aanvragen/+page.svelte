@@ -69,7 +69,9 @@
 		<Body>
 			{#each items as item (item.id)}
 				<Row>
-					<Cell on:click={() => goto(`/aanvragen/${item.id}`)}>{item.requestText}</Cell>
+					<Cell on:click={() => goto(`/aanvragen/${item.id}`)}
+						>{item.requestText.split('\n\n')[0]}</Cell
+					>
 					<Cell numeric>{unixConvertion(item.date)}</Cell>
 				</Row>
 			{/each}
