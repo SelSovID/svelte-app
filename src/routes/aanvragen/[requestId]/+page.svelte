@@ -7,6 +7,7 @@
 	import Drawer, { AppContent, Content } from '@smui/drawer';
 	import List, { Item, Text } from '@smui/list';
 	import green_checkmark from '../../../lib/green_checkmark.png';
+	import { each } from 'svelte/internal';
 
 	type Aanvraag = {
 		id: number;
@@ -22,6 +23,10 @@
 	const items = data.items;
 	let showForm = false;
 	let value = '';
+	let VCdata = items.attachedVCs.toString();
+	let VCarray: string | any[] = [];
+
+	VCdata = VCdata.split(',');
 
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
@@ -35,7 +40,6 @@
 			return response;
 		}
 	}
-	console.log(items.attachedVCs);
 </script>
 
 <br />
@@ -54,7 +58,12 @@
 	<h3>{unixConvertion(items.date)}</h3>
 	<p>{items.requestText}</p>
 
-	<!-- <p>{items.attachedVCs}</p> -->
+	{#each VCdata as data}
+		{#if data.includes('credentialText')}
+			{VCarray.push(data)}
+		{/if}
+	{/each}
+
 	<br />
 	Meegeleverde VCs bij deze aanvraag:
 	<div class="drawer-container">
@@ -62,10 +71,20 @@
 			<Content>
 				<List>
 					<!-- de img is een green checkmark, deze staat hardcoded omdat de VCs al worden gechecked in de API -->
-					{#each items as item (item.id)}
+					{#each VCarray as VC}
 						<!-- moet nog automatisch items aangemaakt worden wanneer de attachedVCs geformat zijn -->
+						<Item href="javascript:void(0)" on:click={() => (selectedVC = VC)}>
+							<Text
+								>VC <img
+									src={green_checkmark}
+									alt="green checkmark"
+									width="12px"
+									height="12px"
+								/></Text
+							>
+						</Item>
 					{/each}
-					<Item href="javascript:void(0)" on:click={() => (selectedVC = items.attachedVCs)}>
+					<!-- <Item href="javascript:void(0)" on:click={() => (selectedVC = items.attachedVCs)}>
 						<Text
 							>aaaaaaa <img
 								src={green_checkmark}
@@ -84,7 +103,7 @@
 								height="12px"
 							/></Text
 						>
-					</Item>
+					</Item> -->
 				</List>
 			</Content>
 		</Drawer>
@@ -148,7 +167,7 @@
 		position: relative;
 		display: flex;
 		height: auto;
-		max-width: 600px;
+		max-width: 1200px;
 		border: 1px solid var(--mdc-theme-text-hint-on-background, grey);
 		overflow: hidden;
 		z-index: 0;
