@@ -62,7 +62,7 @@
 	<h3>{unixConvertion(items.date)}</h3>
 	<p>{items.requestText}</p>
 	<br />
-	Meegeleverde VCs bij deze aanvraag:
+	<h3>Meegeleverde VCs bij deze aanvraag:</h3>
 	<div class="drawer-container">
 		<Drawer>
 			<Content>
