@@ -31,9 +31,6 @@
 	let showForm = false;
 	let value = '';
 	let VCdata = items.attachedVCs.map((vc) => JSON.parse(vc) as SSICertJSON);
-	// let VCarray: string | any[] = [];
-
-	// VCdata = VCdata.split(',');
 
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
@@ -65,12 +62,6 @@
 	<h3>{unixConvertion(items.date)}</h3>
 	<p>{items.requestText}</p>
 
-	<!-- {#each VCdata as data}
-		{#if data.includes('credentialText')}
-			{VCarray.push(data)}
-		{/if}
-	{/each} -->
-
 	<br />
 	Meegeleverde VCs bij deze aanvraag:
 	<div class="drawer-container">
@@ -79,34 +70,16 @@
 				<List>
 					<!-- de img is een green checkmark, deze staat hardcoded omdat de VCs al worden gechecked in de API -->
 					{#each VCdata as VC}
-						<!-- moet nog automatisch items aangemaakt worden wanneer de attachedVCs geformat zijn -->
-						<Item href="javascript:void(0)" on:click={() => (selectedVC = VC[2].credentialText)}>
+						<Item
+							href="javascript:void(0)"
+							on:click={() => (selectedVC = VC[2].credentialText.split('\n\n')[1])}
+						>
 							<Text
-								>VC
+								>{VC[2].credentialText.split('\n\n')[0]}
 								<img src={green_checkmark} alt="green checkmark" width="12px" height="12px" /></Text
 							>
 						</Item>
 					{/each}
-					<!-- <Item href="javascript:void(0)" on:click={() => (selectedVC = items.attachedVCs)}>
-						<Text
-							>aaaaaaa <img
-								src={green_checkmark}
-								alt="green checkmark"
-								width="12px"
-								height="12px"
-							/></Text
-						>
-					</Item>
-					<Item href="javascript:void(0)" on:click={() => (selectedVC = 'blablabla')}>
-						<Text
-							>bbbb <img
-								src={green_checkmark}
-								alt="green checkmark"
-								width="12px"
-								height="12px"
-							/></Text
-						>
-					</Item> -->
 				</List>
 			</Content>
 		</Drawer>
@@ -114,8 +87,8 @@
 		<AppContent class="app-content">
 			<main class="main-content">
 				VC details:
-				<br />
-				<pre class="status">{selectedVC}</pre>
+				<br /><br />
+				{selectedVC}
 			</main>
 		</AppContent>
 	</div>
@@ -172,22 +145,26 @@
 		height: auto;
 		max-width: 1200px;
 		border: 1px solid var(--mdc-theme-text-hint-on-background, grey);
-		overflow: hidden;
 		z-index: 0;
 		margin: auto;
+		overflow-wrap: break-word;
 	}
 
 	* :global(.app-content) {
 		flex: auto;
-		overflow: auto;
 		position: relative;
 		flex-grow: 1;
 	}
 
 	.main-content {
-		overflow: auto;
 		padding: 16px;
 		height: 100%;
 		box-sizing: border-box;
+		overflow-wrap: break-word;
+	}
+
+	.wrap {
+		max-width: 120px;
+		overflow-wrap: break-word;
 	}
 </style>
