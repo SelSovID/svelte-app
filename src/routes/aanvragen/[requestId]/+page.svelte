@@ -37,8 +37,8 @@
 		return date;
 	}
 
-	async function handleRequest(id: number, accept: boolean) {
-		const response = await axios.put(`/api/request/${items.id}`, { accept });
+	async function handleRequest(id: number, accept: boolean, denyReason: string) {
+		const response = await axios.put(`/api/request/${items.id}`, { accept, denyReason });
 		if (response.status === 200) {
 			goto('/aanvragen');
 			return response;
@@ -92,7 +92,7 @@
 
 	<br />
 	<!-- "accept": false -->
-	<Fab color="primary" on:click={() => handleRequest(items.id, true)} extended>
+	<Fab color="primary" on:click={() => handleRequest(items.id, true, '')} extended>
 		<Icon class="material-icons">done</Icon>
 		<Label>goedkeuren</Label>
 	</Fab>
@@ -120,7 +120,7 @@
 		<div>
 			<Button
 				color="primary"
-				on:click={() => handleRequest(items.id, false)}
+				on:click={() => handleRequest(items.id, false, value)}
 				variant="raised"
 				type="submit">versturen</Button
 			>
