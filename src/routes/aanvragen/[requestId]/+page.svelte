@@ -58,7 +58,13 @@
 </div>
 
 <main>
-	<h1>{items.fromUser.email}</h1>
+	<h1>
+		{#if items.fromUser === null}
+			Onbekend
+		{:else}
+			{items.fromUser}
+		{/if}
+	</h1>
 	<h3>{unixConvertion(items.date)}</h3>
 	<p>{items.requestText}</p>
 	<br />
