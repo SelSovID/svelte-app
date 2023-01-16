@@ -1,6 +1,9 @@
 ## Svelte-app README
 
-### starten van de svelte-app
+### gedeployde versie online
+De nieuwste versie staat online op de site: [https://ssi.s.mees.io/](https://ssi.s.mees.io/)
+
+### starten van de svelte-app lokaal
 Clone je repository naar een lokale folder en voer het volgende commando uit in de terminal:
 ```console
 npm install
