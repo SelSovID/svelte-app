@@ -8,20 +8,20 @@
 	import List, { Item, Text } from '@smui/list';
 	import green_checkmark from '../../../lib/green_checkmark.png';
 
-	type SSICertJSON = [
-		{ parent: string | null },
-		{ publicKey: string },
-		{ credentialText: string },
-		{ ownerSignature: string | null },
-		{ parentSignature: string | null }
-	];
+	type SSICertDTO = {
+		parent: SSICertDTO | null;
+		publicKey: string;
+		credentialText: string;
+		ownerSignature: string;
+		parentSignature: string | null;
+	};
 
 	type Aanvraag = {
 		id: number;
-		fromUser: string;
+		fromUser: string | null;
 		requestText: string;
 		date: number;
-		attachedVCs: string[];
+		attachedVCs: SSICertDTO[];
 	};
 
 	let selectedVC = 'nothing selected yet';
@@ -30,7 +30,7 @@
 	const items = data.items;
 	let showForm = false;
 	let value = '';
-	let VCdata = items.attachedVCs.map((vc) => JSON.parse(vc) as SSICertJSON);
+	let VCdata = items.attachedVCs;
 
 	function unixConvertion(unixTimestamp: number) {
 		const date: Date = new Date(unixTimestamp);
@@ -77,10 +77,10 @@
 					{#each VCdata as VC}
 						<Item
 							href="javascript:void(0)"
-							on:click={() => (selectedVC = VC[2].credentialText.split('\n\n')[1])}
+							on:click={() => (selectedVC = VC.credentialText.split('\n\n')[1])}
 						>
 							<Text
-								>{VC[2].credentialText.split('\n\n')[0]}
+								>{VC.credentialText.split('\n\n')[0]}
 								<img src={green_checkmark} alt="green checkmark" width="12px" height="12px" /></Text
 							>
 						</Item>
