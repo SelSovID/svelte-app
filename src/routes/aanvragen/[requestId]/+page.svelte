@@ -65,8 +65,9 @@
 			{items.fromUser}
 		{/if}
 	</h1>
-	<h3>{unixConvertion(items.date)}</h3>
-	<p>{items.requestText}</p>
+	<h5>{unixConvertion(items.date)}</h5>
+	<h3>{items.requestText.split('\n\n')[0]}</h3>
+	<p>{items.requestText.split('\n\n')[1]}</p>
 	<br />
 	<h3>Meegeleverde VCs bij deze aanvraag:</h3>
 	<div class="drawer-container">
