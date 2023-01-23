@@ -8,23 +8,20 @@
 	import List, { Item, Text } from '@smui/list';
 	import green_checkmark from '../../../lib/green_checkmark.png';
 
-	type SSICertDTO = {
-		parent: SSICertDTO | null;
-		publicKey: string;
-		credentialText: string;
-		ownerSignature: string;
-		parentSignature: string | null;
-	};
+	type VCDto = {
+  credentialText: string
+  parent: VCDto | null
+	}	
 
 	type Aanvraag = {
 		id: number;
 		fromUser: string | null;
 		requestText: string;
 		date: number;
-		attachedVCs: SSICertDTO[];
+		attachedVCs: VCDto[];
 	};
 
-	let selectedVC = 'nothing selected yet';
+	let selectedVC = ['nothing selected yet'];
 	let clicked = 0;
 	export let data: { items: Aanvraag };
 	const items = data.items;
@@ -78,7 +75,14 @@
 					{#each VCdata as VC}
 						<Item
 							href="javascript:void(0)"
-							on:click={() => (selectedVC = VC.credentialText.split('\n\n')[1])}
+							on:click={() => {
+								if (VC.parent ){
+									const [, ...body] = VC.parent.credentialText.split("\n\n")
+									selectedVC = [VC.credentialText.split('\n\n')[1], "Uitgegeven door",body.join("\n\n")]
+								} else {
+									selectedVC = [VC.credentialText.split('\n\n')[1]]
+								}
+							}}
 						>
 							<Text
 								>{VC.credentialText.split('\n\n')[0]}
@@ -92,7 +96,9 @@
 
 		<AppContent class="app-content">
 			<main class="main-content">
-				{selectedVC}
+				{#each selectedVC as line}
+					<p>{line}</p>
+				{/each}
 			</main>
 		</AppContent>
 	</div>
